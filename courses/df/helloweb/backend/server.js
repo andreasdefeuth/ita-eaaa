@@ -3,6 +3,7 @@ import express from 'express';
 const port = 3000;
 const server = express();
 server.use(onEachRequest);
+server.use(express.static('frontend'));
 server.get('/api/greeting', onGetGreeting);
 server.get('/api/timestamp', onGetTimestamp);
 server.get('/api/now', onGetNow);
@@ -30,8 +31,6 @@ function onGetStaffById(request, response) {
     const id = parseInt(request.params.id);
     const format = request.query.format;
     const fields = request.query.field;
-
-
     if (0 <= id && id < staff.length) {
         const staffMember = staff[id];
         if (format === 'dict' || format === undefined) {
